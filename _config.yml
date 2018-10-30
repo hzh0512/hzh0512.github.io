@@ -1,5 +1,6 @@
-title: Zihao He's github page
-description: my projects on github
-show_downloads: true
-google_analytics:
+title: Zihao He
 theme: jekyll-theme-architect
+collections:
+  p:
+    output:         true
+    permalink:      /:collection/:path
