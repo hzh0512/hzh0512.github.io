@@ -29,7 +29,7 @@ Our 15618 project is to implement such a MapReduce framework that will take care
 # Resources
 
 * Personal laptops can be used for developing. Moreover, GHC26-46 machines could be used for testing for scalability. During the 5-min feedback, Dr. Mowry mentioned we could use the `Bridges` cluster at the Pittsburgh Supercomputing Center and *we are interested in getting access to it*.
-* The paper from Google is our reference.
+* The [paper](https://research.google.com/archive/mapreduce-osdi04.pdf) from Google is our reference.
 > J. Dean and S. Ghemawat, MapReduce: Simplified Data Processing on Large Clusters. Communications of the ACM, 2008
 * A word counting implementation on a single machine on [Github](https://github.com/cdmh/mapreduce). Another implementation with static scheduling pattern on [Github](https://github.com/wangkuiyi/mapreduce-lite).
 
