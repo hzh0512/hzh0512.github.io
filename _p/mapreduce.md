@@ -5,6 +5,8 @@ tag: 15-418/618 Parallel Computer Architecture and Programming
 description: Zihao He (zihaohe), Shiming Zhuang (szhuang)
 ---
 
+* Project proposal: [here](../assets/files/proposal.pdf)
+
 # Summary
 
 We are going to implement a lightweight MapReduce framework using C++, and demonstrate some machine learning algorithms on top of it.
@@ -35,11 +37,15 @@ Our 15618 project is to implement such a MapReduce framework that will take care
 
 # Goals and Deliverables
 
-* [75%] 
+* [75%] Implement the framework with static workload assignment and demonstrate with word counting.
 
-* [100%] 
+* [100%] Implement dynamic assignment and demonstrate with word counting.
 
-* [120%] 
+* [125%] Implement parallel machine learning algorithms as built-in functions.
+
+* During the poster session, we can show the speedup graph of some algorithms comparing our performance with single-threaded version and see how it gets scalable with more machines. What's more, we can show the programming codes with our framework, which should be concise and easy to read.
+
+* As a system project, we'd like the framework user should not care much about how the parallelism work in details and focus more on making business or analyzing work. The performance should scale with more computers.
 
 # Platform Choice
 
@@ -47,16 +53,16 @@ We decide to use C++ and focus on Linux. Because C++ is highly efficient compare
 
 # Schedule
 
-* Week 1 (Until 11/4):
+* Week 1 (Until 11/4): Read the Google paper and be familiar with existing code on Github.
 
-* Week 2 (Until 11/11):
+* Week 2 (Until 11/11): Implement low-level TCP/IP asynchronous communication protocol.
 
-* Week 3 (Until 11/18) (11/19 Checkpoint):
+* Week 3 (Until 11/18) (11/19 Checkpoint): Finish basic functionality of the MapReduce framework with static work assignment and demonstrate with word counting example program.
 
-* Week 4 (Until 11/25):
+* Week 4 (Until 11/25): Further test the static version and come up with a dynamic version.
 
-* Week 5 (Until 12/2):
+* Week 5 (Until 12/2): Find and test more optimized work distribution designs.
 
-* Week 6 (Until 12/9):
+* Week 6 (Until 12/9): Implement some machine learning algorithms (e.g. naïve bayes, k-means etc.) on top of the framework as the application layer.
 
-* Week 7 (Until 12/16) (12/15 Final Report):
+* Week 7 (Until 12/16) (12/15 Final Report): Test on the performance and write the final report.
