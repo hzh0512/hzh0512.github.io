@@ -32,10 +32,10 @@ header {
 }
 
 header h1 {
-  width: 800px;
+  width: 1000px;
   margin-top: 0;
   margin-bottom: 0.2em;
-  font-size: 72px;
+  font-size: 60px;
   font-weight: normal;
   line-height: 1;
   color: #fff;
@@ -43,13 +43,24 @@ header h1 {
 }
 
 header h2 {
-  width: 540px;
+  width: 1000px;
   margin-top: 0;
   margin-bottom: 0;
   font-size: 26px;
   font-weight: normal;
   line-height: 1.3;
   color: #9ddcff;
+  letter-spacing: 0;
+}
+
+header h3 {
+  width: 1000px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #fff;
   letter-spacing: 0;
 }
 
@@ -70,7 +81,14 @@ header h2 {
 }
 
 #main-content img {
-  max-width: 100%;
+  max-width: 60%;
+  margin-left: auto; 
+  margin-right:auto; 
+  display:block;
+}
+
+#main-content em {
+  font-weight: bold; 
 }
 
 aside#sidebar {
@@ -124,7 +142,7 @@ aside a.button {
 code, pre {
   margin-bottom: 30px;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  font-size: 13px;
+  font-size: 17px;
   color: #222;
 }
 
@@ -190,8 +208,8 @@ form {
 #main-content h1 {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 2.8em;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-size: 2.2em;
   font-weight: normal;
   color: #474747;
   text-indent: 6px;
@@ -207,7 +225,7 @@ form {
 
 #main-content h2 {
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 22px;
   font-weight: bold;
   color: #474747;
@@ -223,7 +241,7 @@ form {
 #main-content h3 {
   margin-top: 24px;
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 18px;
   font-weight: bold;
   color: #474747;
@@ -239,7 +257,7 @@ form {
 
 #main-content h4 {
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 15px;
   font-weight: bold;
   color: #474747;
@@ -255,7 +273,7 @@ h4:before {
 
 #main-content h5 {
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: 14px;
   color: #474747;
   text-indent: 3px;
@@ -269,7 +287,7 @@ h5:before {
 
 #main-content h6 {
   margin-bottom: 8px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: 'Constantia', 'Helvetica Neue', Helvetica, Arial, serif;
   font-size: .8em;
   color: #474747;
   text-indent: 3px;
@@ -282,6 +300,7 @@ h6:before {
 }
 
 p {
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -296,23 +315,26 @@ p a {
 blockquote {
   padding: 0 0 0 30px;
   margin-bottom: 20px;
-  font-size: 15px;
+  font-size: 20px;
   border-left: 10px solid #e9e9e9;
 }
 
 ul {
+  font-size: 20px;
   list-style-position: inside;
   list-style: disc;
   padding-left: 20px;
 }
 
 ol {
+  font-size: 20px;
   list-style-position: inside;
   list-style: decimal;
   padding-left: 20px;
 }
 
 dl dd {
+  font-size: 20px;
   font-style: italic;
   font-weight: 100;
 }
@@ -360,10 +382,10 @@ footer a:hover {
     width: 340px;
   }
   header h1 {
-    font-size: 60px;
+    font-size: 40px;
   }
   header h2 {
-    font-size: 30px;
+    font-size: 25px;
   }
   #main-content {
     width: 490px;
