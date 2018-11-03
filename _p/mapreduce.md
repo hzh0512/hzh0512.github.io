@@ -4,7 +4,7 @@ title: Lightweight MapReduce Framework
 tag: 15-418/618 Parallel Computer Architecture and Programming
 description: Zihao He (zihaohe), Shiming Zhuang (szhuang)
 ---
-
+* Project repository: [here](https://github.com/hzh0512/Lightweight-MapReduce)
 * Project proposal: [here](../assets/files/proposal.pdf)
 
 # Summary
