@@ -4,14 +4,15 @@ title: Lightweight MapReduce Framework
 tag: 15-418/618 Parallel Computer Architecture and Programming
 description: Zihao He (zihaohe), Shiming Zhuang (szhuang)
 ---
-last update: 11/19/2018
+last update: 12/16/2018
 * Project repository: [here](https://github.com/hzh0512/Lightweight-MapReduce)
 * Project proposal: [here](../assets/files/proposal.pdf)
 * Project checkpoint: [here](../assets/files/checkpoint.pdf)
+* Project final report: [here](../assets/files/final_report.pdf)
 
 # Summary
 
-We are going to implement a lightweight MapReduce framework using C++, and demonstrate some machine learning algorithms on top of it.
+We implemented a lightweight MapReduce framework using C++, and demonstrated several machine learning algorithms (e.g. naïve bayes, logistic regression etc.) on top of it, which shows the feasibility of large scale parallel machine learning algorithms.
 
 # Background
 
@@ -50,7 +51,7 @@ The number of mappers is 2, and the number of mappers is 2.
 
 # Resources
 
-* Personal laptops can be used for developing. Moreover, GHC26-46 machines could be used for testing for scalability. During the 5-min feedback, Dr. Mowry mentioned we could use the `Bridges` cluster at the Pittsburgh Supercomputing Center and *we are interested in getting access to it*.
+* Personal laptops can be used for developing. Moreover, GHC26-46 machines could be used for testing for scalability.
 * The [paper](https://research.google.com/archive/mapreduce-osdi04.pdf) from Google is our reference.
 > J. Dean and S. Ghemawat, MapReduce: Simplified Data Processing on Large Clusters. Communications of the ACM, 2008
 * A word counting implementation on a single machine on [Github](https://github.com/cdmh/mapreduce). Another implementation with static scheduling pattern on [Github](https://github.com/wangkuiyi/mapreduce-lite).
