@@ -17,37 +17,92 @@ We implemented a lightweight MapReduce framework using C++, and demonstrated sev
 # Background
 
 ![execution overview](../assets/images/mr1.png)
-<center>image credit: Dean, Ghemawat</center>
+<center>Fig 1: Execution overview. Image credit: Dean, Ghemawat</center>
 
 As big companies are collecting more and more data (e.g. logging info, clicking data, social network info etc.) from users, they are facing a tough problem of dealing with a large amount of data. The processing and analyzing tasks require huge computation power from hundreds or even thousands of computers. Many of the problems are pretty straightforward such as word counting, naïve bayes classification etc., and the intrinsic difficulty instead becomes how to distribute and parallelize the workload efficiently. To focus on the business logic itself instead of the general parallelism problem, Jeffreay Dean etc. proposed a programming model named MapReduce, where users specify a *map* function to generate a set of intermediate key/value pairs, and a *reduce* function to merge all intermediate values with the same key (see diagram above). It turns out that many real world problems can be expressed in this model. And this idea enables great convenience for programmers without any experience with parallel systems to write highly scalable programs.
 
 Our 15618 project is to implement such a MapReduce framework that will take care of the details of partitioning the input data, scheduling and distributing tasks and so on. It is lightweight because it *does not* handle unexpected situations such as machine failures, network interruptions or hard drive problems etc, and it will take advantage of existing distributed file system for sharing partial results. The framework will support dynamic work distribution by assigning one master which saves the task states and controlling the rest workers.
 
-# Preliminary Result
-The following result are tested on a localhost with a quad-core Intel i5-8267u CPU.
+# Approach
 
-## Different Number of Mappers
-The number of reducers is 2, and the number of tasks is 12.
+![Work flow](../assets/images/mr_workflow.png)
+<center>Fig 2: Work flow of a task</center>
 
-![mapper](../assets/images/checkpoint_mapper.png)
+The main workflow is as above. The master is executed by the user and then it will ssh to other machines to bring up all the workers specified in a configuration file by the user. Note that the program is in a single binary file which has the ability to turn into a master as well as a worker. What it will be is determined by the argument passed to it at the beginning. The task may be splitted into multiple stages and requires several rounds of Maps and Reduces (e.g. KMeans has a threshold to stop the iteration, Naïve Bayes has two stages for training, etc.), and the scheduling is solely controlled by the master node. After each stages there is a barrier for all the workers and only then the master will trigger the next stage. 
 
-## Different Number of Reducers
-The number of mappers is 4, and the number of tasks is 12.
+After all the workers have checked in with the master at the beginning, stage 1 starts. At each stage the master would assign each worker to be a mapper or reducer. A mapper will be assigned an input file by the master and notify the master when it is done and get its next input. The output of mappers are called temporary files or partial results which will be used by reducers as input and be deleted after this stage. After all the mappers are done, reducers are assigned to work on the partial results and output the final result of this stage in the end. The stage finishes after all the reducers are done, and then the next stage starts until the end.
 
-![reducer](../assets/images/checkpoint_reducer.png)
+The worker is able to turn into a mapper or reducer dynamically, which is beneficial for the whole speedup. Because in some cases the mapper side has much more work to do and it would be helpful to assign more mappers than reducers. Note that a single machine can run multiple workers at the same time, so the MapReduce framework takes advantage of both multi-process parallelism and distributed system.
 
-## Different Number of Tasks
-The number of mappers is 2, and the number of mappers is 2.
+![packet format](../assets/images/mr_packet.png)
+<center>Fig 3: TCP packet format</center>
 
-![task](../assets/images/checkpoint_task.png)
+We designed our own packet header as in Figure3. **msg_type** includes LMR_CHECKIN, LMR_ASSIGN_MAPPER, LMR_MAPPER_DONE etc. for assigning handlers more conveniently. For example, upon receiving LMR_CHECKIN the master will increase the counter and check whether all workers have checked in. Upon receiving LMR_ASSIGN_MAPPER the mapper will start working on the input specified in the **data** field.
 
-# Challenges
+In the message handler, it will spawn a new thread to do the work as it may take a long time and block later messages. When encountering unexpected worker failure, the TCP connection with the master is down which will cause the master to shut down the whole task.
 
-* Workers are doing separate tasks and there are no synchronizations during the task. Messages are transmitted asynchronously when the task is done, thus we are not using OpenMPI or OpenMP. We need to implement a set of Low-level asynchronous communication functions through TCP/IP.
-* How to distribute the workload smartly and efficiently? How to exploit the locality that some Map workers are on the same machine as other Reduce workers?
-* What messages are transmitted during the communication? How to reduce the amount of data transmitted each time and how to lower the times of communication?
-* Can we not store the result onto the hard drive? How to make use of the memory which is 100x faster than accessing the hard drive?
+# Sample Code for K-Means
+```C++
+#include "../src/mapreduce.h"
+#include "../src/ml/kmeans.h"
+ 
+using namespace lmr;
+using namespace std;
+ 
+int main(int argc, char **argv)
+{
+    MapReduceSpecification spec;
+    MapReduceResult result;
+ 
+    spec.config_file = "config.txt";
+    spec.index = (argc == 2) ? atoi(argv[1]) : 0;
+    spec.num_mappers = 10;
+    spec.num_reducers = 10;
+    
+    MapReduce mr(&spec);
+    ml::kmeans km(&mr);
+ 
+    // 10 inputs, threshold is 0.1, maximum 20 iterations
+    km.train("input_%d.txt", 10, "centroids.txt", 0.1, 20, result);
+    km.predict("input_%d.txt", 10, "result_%d.txt", result);
+ 
+    // print prediction time cost.
+    printf("%.3fs elapsed.\n", result.timeelapsed);
 
+    return 0;
+}
+```
+
+# Results
+The following results are tested on the GHC machine cluster each with an eight core Xeon E5-1660 CPU with 2-way hyperthreading.
+
+## Different number of mappers
+![time vs. number of mappers](../assets/images/mr_kmeans.png)
+<center>Fig 4: Time vs. Number of mappers</center>
+
+## Different number of inputs
+![time vs. number of inputs](../assets/images/mr_data.png)
+<center>Fig 5: Time vs. Number of inputs</center>
+
+## Speedup vs. Inputs (optimally 8x speedup)
+![speedup vs. number of inputs](../assets/images/mr_speedup.png)
+<center>Fig 6: Speedup vs. Number of inputs</center>
+
+## Time vs. Number of mappers per node
+Eight core each node with 2-way hyperthreading
+![time vs. number of mappers per node](../assets/images/mr_nodes.png)
+<center>Fig 7: Time vs. Number of mappers per node</center>
+
+# Conclusion
+
+Features:
+* Scalability: The applications can be easily implemented on multi-node system, and the scalability of the application is ideal when the problem size is large enough.
+* Dynamic Scheduling: The framework support dynamic scheduling for mappers and reducers. When the input files are not partitioned evenly, this feature can improve the work-load balance of the system.
+* Connection Reuse: After the connections between master and workers are set, different rounds of MapReduce will reuse these connections to avoid starting overhead.
+
+Issues:
+* Starting Overhead: For application with few iterations, the overhead of workers assignment would overweigh the benefit of more workers.
+* Critical Section: When mappers or reducers send finishing message to master, there is a critical section in master to protect the job queue and finishing counter, which must be done sequentially and may limit the scalability.
 
 # Resources
 
@@ -73,7 +128,7 @@ The number of mappers is 2, and the number of mappers is 2.
 
 # Platform Choice
 
-We decide to use C++ and focus on Linux. Because C++ is highly efficient compared with Java, the STL and thread/chrono standard libraries give us enough flexibility, and libevent/protobuf libraries make it more portable and convenient for asynchronous network communication and serialization. Linux is the mainstream operating system in servers and supercomputers.
+We decide to use C++ and focus on Linux. Because C++ is highly efficient compared with Java, the STL and thread/chrono standard libraries give us enough flexibility, and libevent library makes it more portable and convenient for asynchronous network communication and serialization. Linux is the mainstream operating system in servers and supercomputers.
 
 
 # Schedule
