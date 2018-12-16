@@ -6,9 +6,10 @@ description: Zihao He (zihaohe), Shiming Zhuang (szhuang)
 ---
 last update: 12/16/2018
 * Project repository: [here](https://github.com/hzh0512/Lightweight-MapReduce)
-* Project proposal: [here](../assets/files/proposal.pdf)
-* Project checkpoint: [here](../assets/files/checkpoint.pdf)
-* Project final report: [here](../assets/files/final_report.pdf)
+* Project proposal: [here](../assets/files/lmr_proposal.pdf)
+* Project checkpoint: [here](../assets/files/lmr_checkpoint.pdf)
+* Project final report: [here](../assets/files/lmr_final_report.pdf)
+* Project poster: [here](../assets/files/lmr_poster.pdf)
 
 # Summary
 
