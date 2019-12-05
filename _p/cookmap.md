@@ -30,13 +30,19 @@ This is a 2D adventure game where the player has to collect ingredients, try out
 
 ![asset1](../assets/images/cookmap_asset1.jpg)
 
-# Asset Credit
+# Assets Credit
 
 Chef character asset is purchased from [Unity Asset Store](https://assetstore.unity.com/).
 
 Enemy and background asset are purchased from [Kenney](https://kenney.nl/).
 
 All icon assets are purchased from [flaticon](https://www.flaticon.com/).
+
+All music assets are downloaded from [freepd](https://freepd.com/) and [freesound](https://freesound.org/).
+
+The rope font comes from [sourceforge](https://sourceforge.net/projects/rods-custom-font-xcf-files/).
+
+This game was built with [NEST](https://github.com/yy9669/CookMap/blob/master/NEST.md).
 
 # Contact
 
