@@ -5,7 +5,7 @@ tag: 15-466/666 Computer Game Programming
 description: Xuyang Fang, Junjie Wang, Haomin Wang, Zihao He
 ---
 
-<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/5hdXsl1ZsW8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/mA3wqXsRHHI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 # Description
 
@@ -20,11 +20,23 @@ This is a 2D adventure game where the player has to collect ingredients, try out
 
 # Screenshots
 
-![cover picture](../assets/images/cookmap_cover1.png)
+![cover picture1](../assets/images/cookmap_cover1.png)
 
-![cover picture](../assets/images/cookmap_cover2.png)
+![cover picture2](../assets/images/cookmap_cover2.png)
 
-![cover picture](../assets/images/cookmap_cover3.png)
+![cover picture3](../assets/images/cookmap_cover3.png)
+
+# Logos
+
+![asset1](../assets/images/cookmap_asset1.jpg)
+
+# Asset Credit
+
+Chef character asset is purchased from [Unity Asset Store](https://assetstore.unity.com/).
+
+Enemy and background asset are purchased from [Kenney](https://kenney.nl/).
+
+All icon assets are purchased from [flaticon](https://www.flaticon.com/).
 
 # Contact
 
