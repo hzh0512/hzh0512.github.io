@@ -3,6 +3,12 @@ layout: homepage
 title: Zihao's Homepage
 ---
 
+# [CookMap -- A Cook's Adventure](p/cookmap)
+
+![mapreduce overview](../assets/images/cookmap_cover.png)
+
+This is a 2D adventure game where the player has to collect ingredients, try out different recipes, bribe greedy aliens and find the ultimate delicacy. Available on Mac, Windows and Linux.
+
 # [Lightweight MapReduce Framework](p/mapreduce)
 
 ![mapreduce overview](../assets/images/mr1.png)
