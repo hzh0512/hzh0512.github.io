@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: singlecell
 title: Single Cell Classification
 tag: 10701 Introduction to Machine Learning (PhD)
 description: Derun Gu, Zhengyu Chen, Zihao He

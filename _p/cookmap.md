@@ -5,7 +5,23 @@ tag: 15-466/666 Computer Game Programming
 description: Xuyang Fang, Junjie Wang, Haomin Wang, Zihao He
 ---
 
-<p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/mA3wqXsRHHI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<style>
+.container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+.video {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+}
+</style>
+
+<div class="container"><iframe width="560" height="315" src="https://www.youtube.com/embed/mA3wqXsRHHI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="video"></iframe></div>
 
 # Description
 
